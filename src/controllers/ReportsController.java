@@ -1,0 +1,273 @@
+package controllers;
+
+import DBAccess.DBAppointments;
+import DBAccess.DBContacts;
+import DBAccess.DBCountries;
+import SchedulingApplication.FileIO;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import model.*;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ResourceBundle;
+
+public class ReportsController implements Initializable {
+
+    @FXML
+    private Tab customerAppointmentsTab;
+
+    @FXML
+    private TableView<Appointments> appointmentsByTypeTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdColByType;
+
+    @FXML
+    private TableColumn<Appointments, String> titleColByType;
+
+    @FXML
+    private TableColumn<Appointments, String> typeColByType;
+
+    @FXML
+    private TableColumn<Appointments, String> descriptionColByType;
+
+    @FXML
+    private TableColumn<Appointments, String> locationColByType;
+
+    @FXML
+    private TableColumn<Appointments, LocalDate> dateColByType;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> startTimeColByType;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> endTimeColByType;
+
+    @FXML
+    private TableColumn<Appointments, Integer> custIdColByType;
+
+    @FXML
+    private TableView<Appointments> appointmentByMonthTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, String> titleColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, String> typeColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, String> descriptionColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, String> locationColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, LocalDate> dateColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> startTimeColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> endTimeColByMonth;
+
+    @FXML
+    private TableColumn<Appointments, Integer> custIdColByMonth;
+
+    @FXML
+    private ComboBox<String> typeCB;
+
+    @FXML
+    private ComboBox<String> monthCB;
+
+    @FXML
+    private Tab appointmentsByCountryTab;
+
+    @FXML
+    private TableView<Appointments> apointmentsByCountryTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, String> titleColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, String> typeColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, String> descriptionColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, String> locationColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, LocalDate> dateColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> startTimeColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> endTimeColByCountry;
+
+    @FXML
+    private TableColumn<Appointments, Integer> custIdColByCountry;
+
+    @FXML
+    private ComboBox<Countries> countryCB;
+
+    @FXML
+    private Label totalByCountryLbl;
+
+    @FXML
+    private Tab appointmentsByContactTab;
+
+    @FXML
+    private Label totalByMonthLbl;
+
+    @FXML
+    private Label totalByTypeLbl;
+
+    @FXML
+    private TableView<Appointments> appointmentByContactsTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdCol;
+
+    @FXML
+    private TableColumn<Appointments, String> titleCol;
+
+    @FXML
+    private TableColumn<Appointments, String> typeCol;
+
+    @FXML
+    private TableColumn<Appointments, String> descriptionCol;
+
+    @FXML
+    private TableColumn<Appointments, String> locationCol;
+
+    @FXML
+    private TableColumn<Appointments, LocalDate> dateCol;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> startTimeCol;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> endTimeCol;
+
+    @FXML
+    private TableColumn<Appointments, Integer> custIdCol;
+
+    @FXML
+    private Label totalApptsLbl;
+
+    @FXML
+    private ComboBox<Contact> contactCBox;
+
+    @FXML
+    private Tab loginAttemptsTab;
+
+    @FXML
+    private TextArea loginAttemptsTextArea;
+
+    @FXML
+    private Button backBtn;
+
+    @FXML
+    void onActionTypeSelected(ActionEvent event) {
+        appointmentsByTypeTableView.setItems(DBAppointments.getApptsByType(typeCB.getSelectionModel().getSelectedItem()));
+        apptIdColByType.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColByType.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColByType.setCellValueFactory(new PropertyValueFactory<>("description"));
+        typeColByType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        locationColByType.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateColByType.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeColByType.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColByType.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdColByType.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        totalByTypeLbl.setText(String.valueOf(appointmentsByTypeTableView.getItems().size()));
+    }
+
+    @FXML
+    void onActionMonthSelected(ActionEvent event) {
+        appointmentByMonthTableView.setItems(DBAppointments.getApptsByMonth((monthCB.getSelectionModel().getSelectedItem())));
+        apptIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColByMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
+        typeColByMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
+        descriptionColByMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationColByMonth.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateColByMonth.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        totalByMonthLbl.setText(String.valueOf(appointmentByMonthTableView.getItems().size()));
+    }
+
+    @FXML
+    void onActionCountrySelected(ActionEvent event) {
+        apointmentsByCountryTableView.setItems(DBAppointments.getApptsByCountry(countryCB.getSelectionModel().getSelectedItem().getId()));
+        apptIdColByCountry.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColByCountry.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColByCountry.setCellValueFactory(new PropertyValueFactory<>("description"));
+        typeColByCountry.setCellValueFactory(new PropertyValueFactory<>("type"));
+        locationColByCountry.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateColByCountry.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdColByCountry.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        totalByCountryLbl.setText(String.valueOf(apointmentsByCountryTableView.getItems().size()));
+    }
+
+    @FXML
+    void onActionContactSelected(ActionEvent event) {
+        appointmentByContactsTableView.setItems(DBAppointments.getApptsByContact(contactCBox.getSelectionModel().getSelectedItem().getId()));
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        totalApptsLbl.setText(String.valueOf(appointmentByContactsTableView.getItems().size()));
+    }
+
+    @FXML
+    void onActionBackBtn(ActionEvent event) {
+            //back to main menu
+        try {
+            SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
+        } catch (NullPointerException | IOException e) {
+            ExceptionHandlers.nextPageError(event);
+        }
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        typeCB.setItems(AppointmentTypes.getTypes());
+        monthCB.setItems(Months.getMonths());
+        countryCB.setItems(DBCountries.getAllCountries());
+
+        contactCBox.setItems(DBContacts.getAllContacts());
+        loginAttemptsTextArea.setText(FileIO.read());
+    }
+}

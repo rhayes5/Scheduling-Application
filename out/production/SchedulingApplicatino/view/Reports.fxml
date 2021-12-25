@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportsController">
+   <children>
+      <TabPane layoutX="24.0" layoutY="67.0" prefHeight="607.0" prefWidth="855.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="appointmentsByTypeTab" text="Appointments by Type">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="2.0" layoutY="9.0" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
+                           <children>
+                              <Label text="Appointments by Type">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutY="95.0" prefHeight="481.0" prefWidth="850.0" spacing="15.0">
+                           <children>
+                              <TableView fx:id="appointmentsByTypeTableView" prefHeight="482.0" prefWidth="849.0">
+                                 <columns>
+                                    <TableColumn fx:id="apptIdColByType" prefWidth="48.0" text="Appt ID" />
+                                    <TableColumn fx:id="titleColByType" prefWidth="96.0" text="Title" />
+                                    <TableColumn fx:id="typeColByType" prefWidth="113.0" text="Type" />
+                                    <TableColumn fx:id="descriptionColByType" prefWidth="155.0" text="Description" />
+                                    <TableColumn fx:id="locationColByType" prefWidth="118.0" text="Location" />
+                                    <TableColumn fx:id="dateColByType" prefWidth="88.0" text="Date" />
+                                    <TableColumn fx:id="startTimeColByType" prefWidth="72.0" text="Start Time" />
+                                    <TableColumn fx:id="endTimeColByType" prefWidth="84.0" text="End Time" />
+                                    <TableColumn fx:id="custIdColByType" prefWidth="72.0" text="Cust ID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="typeCB" layoutX="161.0" layoutY="64.0" onAction="#onActionTypeSelected" prefHeight="25.0" prefWidth="224.0" />
+                        <Label layoutX="102.0" layoutY="68.0" text="Type:" />
+                        <Label layoutX="545.0" layoutY="68.0" text="Total:" />
+                        <Label fx:id="totalByTypeLbl" layoutX="601.0" layoutY="68.0" prefHeight="17.0" prefWidth="41.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="appointmentsByMonth" text="Appointments by Month">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox alignment="CENTER" layoutX="3.0" layoutY="8.0" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Month">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutY="97.0" prefHeight="481.0" prefWidth="850.0" spacing="15.0">
+                           <children>
+                              <TableView fx:id="appointmentByMonthTableView" prefHeight="481.0" prefWidth="845.0">
+                                 <columns>
+                                    <TableColumn fx:id="apptIdColByMonth" prefWidth="48.0" text="Appt ID" />
+                                    <TableColumn fx:id="titleColByMonth" prefWidth="96.0" text="Title" />
+                                    <TableColumn fx:id="typeColByMonth" prefWidth="113.0" text="Type" />
+                                    <TableColumn fx:id="descriptionColByMonth" prefWidth="155.0" text="Description" />
+                                    <TableColumn fx:id="locationColByMonth" prefWidth="118.0" text="Location" />
+                                    <TableColumn fx:id="dateColByMonth" prefWidth="88.0" text="Date" />
+                                    <TableColumn fx:id="startTimeColByMonth" prefWidth="72.0" text="Start Time" />
+                                    <TableColumn fx:id="endTimeColByMonth" prefWidth="84.0" text="End Time" />
+                                    <TableColumn fx:id="custIdColByMonth" prefWidth="72.0" text="Cust ID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="monthCB" layoutX="161.0" layoutY="65.0" onAction="#onActionMonthSelected" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="104.0" layoutY="69.0" text="Month:" />
+                        <Label layoutX="548.0" layoutY="69.0" text="Total:" />
+                        <Label fx:id="totalByMonthLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="appointmentsByCountryTab" text="Appointments By Country">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="855.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Customer's Country">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox layoutY="94.0" prefHeight="478.0" prefWidth="850.0" spacing="15.0">
+                           <children>
+                              <TableView fx:id="apointmentsByCountryTableView" prefHeight="455.0" prefWidth="850.0">
+                                 <columns>
+                                    <TableColumn fx:id="apptIdColByCountry" prefWidth="48.0" text="Appt ID" />
+                                    <TableColumn fx:id="titleColByCountry" prefWidth="96.0" text="Title" />
+                                    <TableColumn fx:id="typeColByCountry" prefWidth="113.0" text="Type" />
+                                    <TableColumn fx:id="descriptionColByCountry" prefWidth="155.0" text="Description" />
+                                    <TableColumn fx:id="locationColByCountry" prefWidth="118.0" text="Location" />
+                                    <TableColumn fx:id="dateColByCountry" prefWidth="88.0" text="Date" />
+                                    <TableColumn fx:id="startTimeColByCountry" prefWidth="72.0" text="Start Time" />
+                                    <TableColumn fx:id="endTimeColByCountry" prefWidth="84.0" text="End Time" />
+                                    <TableColumn fx:id="custIdColByCountry" prefWidth="72.0" text="Cust ID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                        <ComboBox fx:id="countryCB" layoutX="167.0" layoutY="61.0" onAction="#onActionCountrySelected" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="103.0" layoutY="65.0" text="Country" />
+                        <Label layoutX="564.0" layoutY="69.0" text="Total:" />
+                        <Label fx:id="totalByCountryLbl" layoutX="606.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab fx:id="appointmentsByContactTab" text="Appointments by Contact">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="855.0">
+                     <children>
+                        <TableView fx:id="appointmentByContactsTableView" layoutX="3.0" layoutY="70.0" prefHeight="482.0" prefWidth="849.0">
+                          <columns>
+                            <TableColumn fx:id="apptIdCol" prefWidth="48.0" text="Appt ID" />
+                            <TableColumn fx:id="titleCol" prefWidth="96.0" text="Title" />
+                              <TableColumn fx:id="typeCol" prefWidth="113.0" text="Type" />
+                              <TableColumn fx:id="descriptionCol" prefWidth="155.0" text="Description" />
+                              <TableColumn fx:id="locationCol" prefWidth="118.0" text="Location" />
+                              <TableColumn fx:id="dateCol" prefWidth="88.0" text="Date" />
+                              <TableColumn fx:id="startTimeCol" prefWidth="72.0" text="Start Time" />
+                              <TableColumn fx:id="endTimeCol" prefWidth="84.0" text="End Time" />
+                              <TableColumn fx:id="custIdCol" prefWidth="72.0" text="Cust ID" />
+                          </columns>
+                        </TableView>
+                        <HBox alignment="CENTER_LEFT" layoutX="47.0" layoutY="22.0" prefHeight="32.0" prefWidth="482.0" spacing="15.0">
+                           <children>
+                              <Label text="Contact" />
+                              <ComboBox fx:id="contactCBox" onAction="#onActionContactSelected" prefHeight="25.0" prefWidth="300.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="529.0" layoutY="26.0" prefHeight="25.0" prefWidth="315.0" spacing="15.0">
+                           <children>
+                              <Label text="Total Appointments: " />
+                              <Label fx:id="totalApptsLbl" />
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="loginAttemptsTab" text="Login Attempts">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="loginAttemptsTextArea" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="559.0" prefWidth="836.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label alignment="CENTER" focusTraversable="false" layoutX="300.0" layoutY="8.0" prefHeight="53.0" prefWidth="305.0" text="View Reports">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="backBtn" layoutX="802.0" layoutY="684.0" mnemonicParsing="false" onAction="#onActionBackBtn" text="Back" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="25.0" top="15.0" />
+   </padding>
+</AnchorPane>
