@@ -501,6 +501,56 @@ public class DBAppointments {
         }
         return a;
     }
+
+    public static ObservableList<Appointments> appointmentsByDates(LocalDate startSearch, LocalDate endSearch)
+    {
+        ObservableList<Appointments> apptsByWeekList = FXCollections.observableArrayList();
+
+        LocalDateTime startSearchLDT = LocalDateTime.of(startSearch, startSearch.atStartOfDay().toLocalTime());
+        LocalDateTime endSearchLDT = LocalDateTime.of(endSearch.plusDays(1), endSearch.atStartOfDay().toLocalTime());
+
+        Timestamp startTimestamp = Timestamp.valueOf(startSearchLDT);
+        Timestamp endTimestamp = Timestamp.valueOf(endSearchLDT);
+        try {
+            String sql = "SELECT * from appointments WHERE start >= ? AND start <= ? ORDER BY start";
+
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
+            ps.setTimestamp(1, startTimestamp);
+            ps.setTimestamp(2, endTimestamp);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                int id = rs.getInt("Appointment_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
+                LocalDate startDate = startZoned.toLocalDate();
+                LocalTime startTime = startZoned.toLocalTime();
+
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
+                LocalDate endDate = endZoned.toLocalDate();
+                LocalTime endTime = endZoned.toLocalTime();
+
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                int contactId = rs.getInt("Contact_ID");
+
+                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+                apptsByWeekList.add(c);
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return apptsByWeekList;
+    }
 }
 
 

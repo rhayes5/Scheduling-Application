@@ -87,6 +87,51 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, Integer> custIdColByMonth;
 
     @FXML
+    private Tab appointmentsByWeekTab;
+
+    @FXML
+    private TableView<Appointments> appointmentByWeekTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, String> titleColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, String> typeColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, String> descriptionColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, String> locationColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, LocalDate> dateColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> startTimeColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, LocalTime> endTimeColByWeek;
+
+    @FXML
+    private TableColumn<Appointments, Integer> custIdColByWeek;
+
+    @FXML
+    private Label totalByWeek;
+
+    @FXML
+    private DatePicker startingDate;
+
+    @FXML
+    private DatePicker endDate;
+
+    @FXML
+    private Button searchDatesBtn;
+
+    @FXML
     private ComboBox<String> typeCB;
 
     @FXML
@@ -247,6 +292,22 @@ public class ReportsController implements Initializable {
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
         totalApptsLbl.setText(String.valueOf(appointmentByContactsTableView.getItems().size()));
+    }
+
+    @FXML
+    void searchDatesBtnClicked(ActionEvent event) {
+        LocalDate startSearch= startingDate.getValue();
+        LocalDate endSearch = endDate.getValue();
+        appointmentByWeekTableView.setItems(DBAppointments.appointmentsByDates(startSearch, endSearch));
+        apptIdColByWeek.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColByWeek.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColByWeek.setCellValueFactory(new PropertyValueFactory<>("description"));
+        typeColByWeek.setCellValueFactory(new PropertyValueFactory<>("type"));
+        locationColByWeek.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateColByWeek.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdColByWeek.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
     @FXML
