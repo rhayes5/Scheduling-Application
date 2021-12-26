@@ -103,8 +103,9 @@ public class DBCustomers {
      * to be deleted if they have a scheduled appointment.
      * @param id The customer id integer of the customer to delete
      * @return true if the customer is deleted or false if not
+     * @throws SQLException Throws exception if problem deleting customer.
      */
-    public static boolean deleteCustomer(int id) {
+    public static boolean deleteCustomer(int id) throws SQLException {
         Alert areYouSureAlert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete this customer?", ButtonType.YES, ButtonType.CANCEL);
 
         Optional<ButtonType> clickButton = areYouSureAlert.showAndWait();
@@ -120,8 +121,6 @@ public class DBCustomers {
                 Alert cannotDeleteAlert = new Alert(Alert.AlertType.ERROR, "Cannot delete a customer with an appointment scheduled.  " +
                         "Delete appointment and then delete the customer.");
                 cannotDeleteAlert.showAndWait();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
         return false;

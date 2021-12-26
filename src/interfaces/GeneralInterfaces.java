@@ -1,18 +1,15 @@
 package interfaces;
 
-import java.time.ZoneId;
 import java.util.Locale;
 
 public interface GeneralInterfaces {
-    interface Country {
-        String getCountryString(Locale l);
-    }
 
-    interface UserTimeZone {
-        String userTime(Locale l);
-    }
-
-    interface convertTime {
-        ZoneId convertTime(ZoneId z);
+    /**
+     * Interface for 2 lambda expressions.
+     * The first lambda expression uses the interface to get and display the user's country as a string on the login page using the user's default locale.
+     * The second lambda expression uses the interface to get and display the user's time zone on the login page using the user's default locale.
+     */
+    interface StringFromLocale {
+        String stringFromLocale(Locale l);
     }
 }

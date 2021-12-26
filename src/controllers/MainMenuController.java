@@ -216,8 +216,8 @@ public class MainMenuController implements Initializable {
                     whoLbl.setText("All Customers");
                     appointmentsTable.setItems(DBAppointments.getAllAppointments());
                 }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
                 Alert unableToDeleteAlert = new Alert(Alert.AlertType.ERROR, "Unable to delete customer.", ButtonType.OK);
                 unableToDeleteAlert.showAndWait();
             }

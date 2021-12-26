@@ -154,12 +154,12 @@ public class LoginController implements Initializable {
         }
 
         //display country on login
-        GeneralInterfaces.Country country = userCountry -> String.valueOf(userCountry.getDisplayCountry());
-        locationLbl.setText(country.getCountryString(Locale.getDefault()));
+        GeneralInterfaces.StringFromLocale country = userCountry -> String.valueOf(userCountry.getDisplayCountry());
+        locationLbl.setText(country.stringFromLocale(Locale.getDefault()));
 
         //get TimeZone
-        GeneralInterfaces.UserTimeZone getUserTimeZone = (Locale l) -> TimeZone.getDefault().getDisplayName(l);
-        timeZoneLbl.setText(getUserTimeZone.userTime(Locale.getDefault()));
+        GeneralInterfaces.StringFromLocale getUserTimeZone = (Locale l) -> TimeZone.getDefault().getDisplayName(l);
+        timeZoneLbl.setText(getUserTimeZone.stringFromLocale(Locale.getDefault()));
     }
 
 }
