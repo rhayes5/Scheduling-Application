@@ -32,8 +32,8 @@ public class DBContacts {
                 Contact c = new Contact(id, name, email);
                 contactsList.add(c);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return contactsList;
     }
@@ -54,10 +54,9 @@ public class DBContacts {
             String name = rs.getString("Contact_Name");
             String email = rs.getString("Email");
 
-            Contact c = new Contact(id, name, email);
-            return c;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return new Contact(id, name, email);
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }

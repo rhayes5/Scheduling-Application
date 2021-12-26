@@ -9,7 +9,13 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class DBUsers {
-    //check to see if username and password match an entry in database
+
+    /**
+     * Checks for the entered username and password in the database and returns true if it exists or false if not.
+     * @param username The user's entered username
+     * @param password The user's entered password
+     * @return true if the username and password exist in the database or false if not
+     */
     public static boolean checkUser(String username, char[] password) {
         try {
             String sql = "SELECT User_ID, User_Name FROM users WHERE User_Name = ? AND Password = ?";

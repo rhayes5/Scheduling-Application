@@ -8,7 +8,11 @@ public class DBQuery {
 
     private static Statement statement;
 
-    //Create statement object
+    /**
+     * Creates statement object
+     * @param conn The database connection
+     * @throws SQLException Throws SQL exception if error creating statement
+     */
     public static void setStatement(Connection conn) throws SQLException {
         statement = conn.createStatement();
     }

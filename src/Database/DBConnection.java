@@ -5,6 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Connects to the database.
+ * Citation: Wabara, Malcolm (9/21/2021) "QSG_Establishing_A_Client-Side_Database_Part_4" webinar.
+ *     https://wgu.webex.com/webappng/sites/wgu/recording/9b8a01f9fcbe1039a7d900505681e613/playback
+ */
 public class DBConnection {
 
     //JDBC URL parts
@@ -21,12 +26,16 @@ public class DBConnection {
     private static final String username = "sqlUser";
     private static final String password = "Passw0rd!";
 
+    /**
+     * Starts the connection to the database and returns the connection.
+     * @return The database connection
+     */
     public static Connection startConnection()
     {
         try {
             Class.forName(mysqlJDBCDriver);
             connection = DriverManager.getConnection(ipAddress, username, password);
-            System.out.println("Connection Successful");
+            //System.out.println("Connection Successful");
         }
         catch(ClassNotFoundException | SQLException e)
         {
@@ -36,25 +45,27 @@ public class DBConnection {
         return connection;
     }
 
+    /**
+     * Returns the active database connection.
+     * @return The database connection
+     */
     public static Connection getConnection()
     {
         return connection;
     }
 
+    /**
+     * Closes the database connection
+     */
     public static void closeConnection() {
         try
         {
             connection.close();
             //System.out.println("Connection Closed");
         }
-        catch (NullPointerException e)
-        {
-            System.out.println("No connection open");
-        }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-
     }
 }

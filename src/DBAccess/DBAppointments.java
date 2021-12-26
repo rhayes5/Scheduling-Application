@@ -58,8 +58,8 @@ public class DBAppointments {
                 appointmentsList.add(c);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return appointmentsList;
     }
@@ -106,8 +106,8 @@ public class DBAppointments {
                 apptsByCustomerList.add(c);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return apptsByCustomerList;
@@ -154,8 +154,8 @@ public class DBAppointments {
                 apptsByContactList.add(c);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return apptsByContactList;
@@ -163,7 +163,6 @@ public class DBAppointments {
 
     /**
      * Searches for appointments in the database in a specific month and returns a list of those appointments.
-     *
      * @param year The 4-digit year integer to search
      * @param month The month string to search
      * @return An observable list of all appointments for that month
@@ -210,8 +209,8 @@ public class DBAppointments {
                 }
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return apptsByMonthList;
     }
@@ -227,9 +226,7 @@ public class DBAppointments {
 
         try {
             String sql = "SELECT * FROM appointments";
-
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next())
@@ -261,8 +258,8 @@ public class DBAppointments {
                 }
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return apptsByTypeList;
     }
@@ -278,9 +275,7 @@ public class DBAppointments {
 
         try {
             String sql = "SELECT * FROM appointments";
-
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next())
@@ -316,8 +311,8 @@ public class DBAppointments {
                 }
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException | NullPointerException e) {
+            e.printStackTrace();
         }
         return apptsByCountryList;
     }
@@ -346,8 +341,8 @@ public class DBAppointments {
                 Alert cannotDeleteAlert = new Alert(Alert.AlertType.ERROR, "Cannot delete appointment.", ButtonType.OK);
                 cannotDeleteAlert.showAndWait();
             }
-            catch (SQLException throwables) {
-                throwables.printStackTrace();
+            catch (SQLException | NullPointerException e) {
+                e.printStackTrace();
             }
         }
         //if not found
@@ -387,10 +382,9 @@ public class DBAppointments {
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");
 
-            Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
-            return c;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            return new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;    //none found
     }
@@ -413,7 +407,6 @@ public class DBAppointments {
                                          Timestamp startTimestamp, Timestamp endTimestamp,
                                          String user, int customerId, int userId, int contactId)
     {
-        //moved the create timestamp to add appointment and update appointment
         try {
             String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Create_Date, Created_By, " +
                     "Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) " +
@@ -435,8 +428,8 @@ public class DBAppointments {
             ps.execute();
             return true;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -484,8 +477,8 @@ public class DBAppointments {
             ps.execute();
             return true;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -559,8 +552,8 @@ public class DBAppointments {
                 apptsByWeekList.add(c);
             }
         }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
+        catch (SQLException e) {
+            e.printStackTrace();
         }
         return apptsByWeekList;
     }
