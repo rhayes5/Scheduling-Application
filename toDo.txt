@@ -1,8 +1,2 @@
 javadocs
 clean up
-
-no overlapping appointments for customer
-
-
-
-Appointments by week records

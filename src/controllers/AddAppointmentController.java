@@ -72,22 +72,24 @@ public class AddAppointmentController implements Initializable {
     @FXML
     private ComboBox<Customer> customerComboBox;
 
+    /**
+     * Returns to the main menu without adding the new appointment.
+     * @param event The cancel button is clicked
+     */
     @FXML
     void onActionCancel(ActionEvent event) {
         try {
             SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
-            /*
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-            stage.setTitle("Main Menu");
-            stage.setScene(new Scene(root));
-            stage.show();
-             */
         } catch (NullPointerException | IOException e) {
             ExceptionHandlers.nextPageError(event);
         }
     }
 
+    /**
+     * Checks all values entered are the valid type, there are no overlapping appointments, and the times are within
+     * business hours and saves the new appointment to the database.
+     * @param event The save button is clicked
+     */
     @FXML
     void onActionSave(ActionEvent event) {
         //check that all values are correct

@@ -87,6 +87,12 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, Integer> custIdColByMonth;
 
     @FXML
+    private TextField yearTextField;
+
+    @FXML
+    private Button monthSearchBtn;
+
+    @FXML
     private Tab appointmentsByWeekTab;
 
     @FXML
@@ -120,7 +126,7 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, Integer> custIdColByWeek;
 
     @FXML
-    private Label totalByWeek;
+    private Label totalByWeekLbl;
 
     @FXML
     private DatePicker startingDate;
@@ -230,6 +236,11 @@ public class ReportsController implements Initializable {
     @FXML
     private Button backBtn;
 
+    /**
+     * Filters appointments by a specific type when a type is selected from a combo box and displays those appointments
+     * in a table view.
+     * @param event A specific type is selected from the Type combo box
+     */
     @FXML
     void onActionTypeSelected(ActionEvent event) {
         appointmentsByTypeTableView.setItems(DBAppointments.getApptsByType(typeCB.getSelectionModel().getSelectedItem()));
@@ -246,22 +257,37 @@ public class ReportsController implements Initializable {
         totalByTypeLbl.setText(String.valueOf(appointmentsByTypeTableView.getItems().size()));
     }
 
+    /**
+     * Filters appointments scheduled in a specific year and month when a year is entered and a month is selected from a
+     * combo box and displays those appointments in a table view.
+     * @param event The search button is selected on the month tab
+     */
     @FXML
-    void onActionMonthSelected(ActionEvent event) {
-        appointmentByMonthTableView.setItems(DBAppointments.getApptsByMonth((monthCB.getSelectionModel().getSelectedItem())));
-        apptIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("id"));
-        titleColByMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
-        typeColByMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
-        descriptionColByMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
-        locationColByMonth.setCellValueFactory(new PropertyValueFactory<>("location"));
-        dateColByMonth.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        custIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+    void onActionMonthSearchBtn(ActionEvent event) {
+        if (CheckValues.isYear(yearTextField.getText())) {
+            appointmentByMonthTableView.setItems(DBAppointments.getApptsByMonth(Integer.valueOf(yearTextField.getText()), monthCB.getSelectionModel().getSelectedItem()));
+            apptIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("id"));
+            titleColByMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
+            typeColByMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
+            descriptionColByMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
+            locationColByMonth.setCellValueFactory(new PropertyValueFactory<>("location"));
+            dateColByMonth.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+            startTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+            endTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+            custIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
-        totalByMonthLbl.setText(String.valueOf(appointmentByMonthTableView.getItems().size()));
+            totalByMonthLbl.setText(String.valueOf(appointmentByMonthTableView.getItems().size()));
+        } else {
+            Alert invalidYearAlert = new Alert(Alert.AlertType.ERROR, "Please enter a valid 4-digit year.", ButtonType.OK);
+            invalidYearAlert.showAndWait();
+        }
     }
 
+    /**
+     * Filters appointments by a specific country when a country is selected from a combo box and displays those appointments
+     * in a table view.
+     * @param event A specific country is selected from the Country combo box
+     */
     @FXML
     void onActionCountrySelected(ActionEvent event) {
         apointmentsByCountryTableView.setItems(DBAppointments.getApptsByCountry(countryCB.getSelectionModel().getSelectedItem().getId()));
@@ -278,6 +304,11 @@ public class ReportsController implements Initializable {
         totalByCountryLbl.setText(String.valueOf(apointmentsByCountryTableView.getItems().size()));
     }
 
+    /**
+     * Filters appointments by a specific contact when a contact is selected from a combo box and displays those appointments
+     * in a table view.
+     * @param event A specific contact is selected from the contact combo box
+     */
     @FXML
     void onActionContactSelected(ActionEvent event) {
         appointmentByContactsTableView.setItems(DBAppointments.getApptsByContact(contactCBox.getSelectionModel().getSelectedItem().getId()));
@@ -294,8 +325,13 @@ public class ReportsController implements Initializable {
         totalApptsLbl.setText(String.valueOf(appointmentByContactsTableView.getItems().size()));
     }
 
+    /**
+     * Filters appointments by a specific date range when a starting date and end date are selected from a date picker
+     * and displays those appointments in a table view.
+     * @param event The search button is clicked
+     */
     @FXML
-    void searchDatesBtnClicked(ActionEvent event) {
+    void onActionSearchDatesBtn(ActionEvent event) {
         LocalDate startSearch= startingDate.getValue();
         LocalDate endSearch = endDate.getValue();
         appointmentByWeekTableView.setItems(DBAppointments.appointmentsByDates(startSearch, endSearch));
@@ -308,8 +344,14 @@ public class ReportsController implements Initializable {
         startTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         custIdColByWeek.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        totalByWeekLbl.setText(String.valueOf(appointmentByWeekTableView.getItems().size()));
     }
 
+    /**
+     * Returns to the main menu.
+     * @param event The back button is clicked
+     */
     @FXML
     void onActionBackBtn(ActionEvent event) {
             //back to main menu
@@ -321,6 +363,11 @@ public class ReportsController implements Initializable {
 
     }
 
+    /**
+     * Fills all the combo boxes when the page loads and reads and displays data from the login_activity file.
+     * @param url The location used
+     * @param rb The resources used
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {

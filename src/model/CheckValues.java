@@ -18,6 +18,15 @@ public class CheckValues {
         }
     }
 
+    public static boolean isYear(String s) {
+        if (isInteger(s)) {
+            int i = Integer.parseInt(s);
+            if (i >= 1000 && i <= 9999)
+                return true;
+        }
+        return false;
+    }
+
     public static boolean isAllowableTimeValue(String h, String m)
     {
         int hour = Integer.parseInt(h);

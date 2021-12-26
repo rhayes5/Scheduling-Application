@@ -163,10 +163,12 @@ public class DBAppointments {
 
     /**
      * Searches for appointments in the database in a specific month and returns a list of those appointments.
-     * @param month The month to search
+     *
+     * @param year The 4-digit year integer to search
+     * @param month The month string to search
      * @return An observable list of all appointments for that month
      */
-    public static ObservableList<Appointments> getApptsByMonth(String month)
+    public static ObservableList<Appointments> getApptsByMonth(Integer year, String month)
     {
         ObservableList<Appointments> apptsByMonthList = FXCollections.observableArrayList();
 
@@ -183,11 +185,11 @@ public class DBAppointments {
                 ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                 LocalDate startDate = startZoned.toLocalDate();
                 LocalTime startTime = startZoned.toLocalTime();
-
+                int y = startDate.getYear();
                 int m = startDate.getMonthValue();
                 int searchedMonth = Months.getMonths().indexOf(month) + 1;
 
-                if(m == searchedMonth) {
+                if(y == year && m == searchedMonth) {
                     int id = rs.getInt("Appointment_ID");
                     String title = rs.getString("Title");
                     String description = rs.getString("Description");
@@ -352,6 +354,11 @@ public class DBAppointments {
         return false;
     }
 
+    /**
+     * Searches for an appointment by id in the database and returns a single appointment if one is found or null if not.
+     * @param id The integer appointment id to search for
+     * @return An appointment with the matching id
+     */
     public static Appointments getAppointmentById(int id) {
 
         try {
@@ -502,6 +509,12 @@ public class DBAppointments {
         return a;
     }
 
+    /**
+     * Searches for appointments between 2 dates in the database and returns an Observable List of appointments.
+     * @param startSearch The local date to begin the search
+     * @param endSearch The local date to end the search
+     * @return An observable list of appointments.
+     */
     public static ObservableList<Appointments> appointmentsByDates(LocalDate startSearch, LocalDate endSearch)
     {
         ObservableList<Appointments> apptsByWeekList = FXCollections.observableArrayList();
@@ -512,7 +525,7 @@ public class DBAppointments {
         Timestamp startTimestamp = Timestamp.valueOf(startSearchLDT);
         Timestamp endTimestamp = Timestamp.valueOf(endSearchLDT);
         try {
-            String sql = "SELECT * from appointments WHERE start >= ? AND start <= ? ORDER BY start";
+            String sql = "SELECT * from appointments WHERE start >= ? AND start < ? ORDER BY start";
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
             ps.setTimestamp(1, startTimestamp);

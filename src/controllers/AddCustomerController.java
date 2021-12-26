@@ -5,15 +5,11 @@ import DBAccess.DBCustomers;
 import DBAccess.DBFirstLevelDivisions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import model.*;
 
 import java.io.IOException;
@@ -21,9 +17,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddCustomerController implements Initializable {
-
-    Parent root;
-    Stage stage;
 
     @FXML
     private TextField customerIdTextField;
@@ -52,6 +45,11 @@ public class AddCustomerController implements Initializable {
     @FXML
     private Button cancelBtn;
 
+    /**
+     * Displays all the first level divisions for a given country when a country is chosen in the country combo box and
+     * allows the first level division combo box to be used.
+     * @param event A country is chosen in the country combo box
+     */
     @FXML
     void countryChosen(ActionEvent event) {
         int cId = countryComboBox.getSelectionModel().getSelectedItem().getId();
@@ -59,18 +57,14 @@ public class AddCustomerController implements Initializable {
         divisionComboBox.setDisable(false);
     }
 
+    /**
+     * Returns to the main menu without adding the new customer.
+     * @param event The cancel button is clicked
+     */
     @FXML
     void onActionCancel(ActionEvent event) {
         try {
             SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
-            /*
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-            stage.setTitle("Main Menu");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-             */
         } catch (NullPointerException | IOException e) {
             ExceptionHandlers.nextPageError(event);
         }
