@@ -5,26 +5,18 @@ import DBAccess.DBContacts;
 import DBAccess.DBCustomers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import model.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
-
-    Parent root;
-    Stage stage;
 
     @FXML
     private Button saveBtn;
@@ -82,14 +74,6 @@ public class UpdateAppointmentController implements Initializable {
     void onActionCancel(ActionEvent event) {
         try {
             SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
-            /*
-            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-            stage.setTitle("Main Menu");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-             */
         } catch (NullPointerException | IOException e) {
             ExceptionHandlers.nextPageError(event);
         }

@@ -70,6 +70,11 @@ public class AddCustomerController implements Initializable {
         }
     }
 
+    /**
+     * Attempts to save the entered data as a new customer.  Displays a confirmation if successful and returns to the
+     * main menu or displays an error if not.
+     * @param event The save button is clicked
+     */
     @FXML
     void onActionSave(ActionEvent event) {
         String name = customerNameTextField.getText();
@@ -84,14 +89,6 @@ public class AddCustomerController implements Initializable {
             successAlert.showAndWait();
             try {
                 SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
-                /*
-                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                root = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-                stage.setTitle("Main Menu");
-                stage.setScene(new Scene(root));
-                stage.show();
-
-                 */
             } catch (NullPointerException | IOException e) {
                 ExceptionHandlers.nextPageError(event);
             }

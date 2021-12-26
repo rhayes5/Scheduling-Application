@@ -16,12 +16,11 @@ import java.sql.SQLException;
 public class Main extends Application {
 
     /**
-     *
+     * Displays the login page.
      * @param primaryStage The primary stage
-     * @throws IOException Throws exception if unable to load next page
      */
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
 
@@ -29,22 +28,24 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
          }
-        catch (NullPointerException e) {
+        catch (NullPointerException | IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Cannot start because page does not exist.  Program will now close.");
+            alert.showAndWait();
         }
     }
 
-
     /**
      * The main method. Creates initial data and launches the program.
-     * @param args  Command line arguments
+     * @param args Command line arguments
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
-        //Locale.setDefault(new Locale("fr", "Quebec"));
-        //TimeZone.setDefault(TimeZone.getTimeZone("EST"));
-        Connection connection = DBConnection.startConnection();
-        DBQuery.setStatement(connection);   //create statement object
+        try {
+            Connection connection = DBConnection.startConnection();
+            DBQuery.setStatement(connection);   //create statement object
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         launch(args);
         try {

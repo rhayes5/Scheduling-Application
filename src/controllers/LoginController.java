@@ -1,7 +1,3 @@
-/*
- * Automatically translates to French based on user's computer settings
- */
-
 package controllers;
 
 import DBAccess.DBAppointments;
@@ -13,16 +9,11 @@ import SchedulingApplication.FileIO;
 import interfaces.GeneralInterfaces;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import Database.DBConnection;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 import model.Appointments;
-import model.ExceptionHandlers;
 import model.SceneChange;
 
 import java.io.IOException;
@@ -64,7 +55,7 @@ public class LoginController implements Initializable {
     private Label timeZoneLbl;
 
     /**
-     * Checks username and password and continues to main menu if correct or displays error if not.
+     * Checks username and password in database and continues to main menu if correct or displays error if not.
      * @param event The login button is clicked
      */
     @FXML
@@ -132,11 +123,11 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * Closes the program when the exit button is clicked.
+     * Closes the program and the database connection when the exit button is clicked.
      * @param event The exit button click
      */
     @FXML
-    void onActionExit(ActionEvent event) throws Exception {
+    void onActionExit(ActionEvent event) {
         DBConnection.closeConnection();
         System.exit(0);
     }

@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -48,10 +49,13 @@
                               </TableView>
                            </children>
                         </HBox>
-                        <ComboBox fx:id="monthCB" layoutX="161.0" layoutY="65.0" onAction="#onActionMonthSelected" prefHeight="25.0" prefWidth="200.0" />
-                        <Label layoutX="104.0" layoutY="69.0" text="Month:" />
+                        <Label layoutX="129.0" layoutY="69.0" text="Month:" />
                         <Label layoutX="548.0" layoutY="69.0" text="Total:" />
                         <Label fx:id="totalByMonthLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                        <Label layoutX="20.0" layoutY="69.0" text="Year:" />
+                        <TextField fx:id="yearTextField" layoutX="52.0" layoutY="65.0" prefHeight="25.0" prefWidth="59.0" promptText="yyyy" />
+                        <ComboBox fx:id="monthCB" layoutX="177.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Button fx:id="monthSearchBtn" layoutX="404.0" layoutY="65.0" mnemonicParsing="false" onAction="#onActionMonthSearchBtn" text="Search" />
                      </children>
                   </AnchorPane>
               </content>
@@ -88,11 +92,11 @@
                         </HBox>
                         <Label layoutX="35.0" layoutY="69.0" text="From:" />
                         <Label layoutX="548.0" layoutY="69.0" text="Total:" />
-                        <Label fx:id="totalByWeek" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                        <Label fx:id="totalByWeekLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
                         <DatePicker fx:id="startingDate" editable="false" layoutX="71.0" layoutY="65.0" prefHeight="25.0" prefWidth="137.0" />
                         <Label layoutX="228.0" layoutY="69.0" text="To:" />
                         <DatePicker fx:id="endDate" editable="false" layoutX="248.0" layoutY="65.0" prefHeight="25.0" prefWidth="137.0" />
-                        <Button fx:id="searchDatesBtn" layoutX="419.0" layoutY="65.0" mnemonicParsing="false" onAction="#searchDatesBtnClicked" text="Search" />
+                        <Button fx:id="searchDatesBtn" layoutX="419.0" layoutY="65.0" mnemonicParsing="false" onAction="#onActionSearchDatesBtn" text="Search" />
                      </children>
                   </AnchorPane>
                </content>

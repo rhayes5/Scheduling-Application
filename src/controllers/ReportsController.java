@@ -6,13 +6,9 @@ import DBAccess.DBCountries;
 import SchedulingApplication.FileIO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import model.*;
 
 import java.io.IOException;
@@ -354,13 +350,11 @@ public class ReportsController implements Initializable {
      */
     @FXML
     void onActionBackBtn(ActionEvent event) {
-            //back to main menu
         try {
             SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
         } catch (NullPointerException | IOException e) {
             ExceptionHandlers.nextPageError(event);
         }
-
     }
 
     /**

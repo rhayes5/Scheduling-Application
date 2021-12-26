@@ -1,11 +1,8 @@
-//move the scene change stuff and move all the add titles to the initialization of that page
-
 package controllers;
 
 import DBAccess.DBAppointments;
 import DBAccess.DBCustomers;
 import Database.DBConnection;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -339,8 +336,8 @@ public class MainMenuController implements Initializable {
     }
 
     /**
-     * When customer is selected, displays their appointments
-     * @param event Customer clicked in table
+     * When customer is selected in the customer table, displays their appointments.
+     * @param event Customer clicked in customer table
      */
     @FXML
     void onMouseClickedCustomer(MouseEvent event) {
