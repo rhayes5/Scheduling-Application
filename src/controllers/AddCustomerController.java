@@ -6,10 +6,7 @@ import DBAccess.DBFirstLevelDivisions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.*;
 
 import java.io.IOException;
@@ -71,30 +68,38 @@ public class AddCustomerController implements Initializable {
     }
 
     /**
-     * Attempts to save the entered data as a new customer.  Displays a confirmation if successful and returns to the
-     * main menu or displays an error if not.
+     * Attempts to save the entered data as a new customer.  Displays an error if any fields are empty.  Displays a
+     * confirmation if successful and returns to the main menu or displays an error if not.
      * @param event The save button is clicked
      */
     @FXML
     void onActionSave(ActionEvent event) {
-        String name = customerNameTextField.getText();
-        String address = addressTextField.getText();
-        String postalCode = postalCodeTextField.getText();
-        String phone = phoneTextField.getText();
-        String user = User.getUsername();;
-        int division = divisionComboBox.getSelectionModel().getSelectedItem().getId();
-        boolean saved = DBCustomers.saveNewCustomer(name, address, postalCode, phone, user, division);
-        if (saved) {
-            Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION, "Customer saved.");
-            successAlert.showAndWait();
-            try {
-                SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
-            } catch (NullPointerException | IOException e) {
-                ExceptionHandlers.nextPageError(event);
+        if (!customerNameTextField.getText().isEmpty() && !addressTextField.getText().isEmpty() &&
+                !countryComboBox.getSelectionModel().isEmpty() && !divisionComboBox.getSelectionModel().isEmpty() &&
+                !postalCodeTextField.getText().isEmpty() && !phoneTextField.getText().isEmpty()) {
+            String name = customerNameTextField.getText();
+            String address = addressTextField.getText();
+            String postalCode = postalCodeTextField.getText();
+            String phone = phoneTextField.getText();
+            String user = User.getUsername();
+            ;
+            int division = divisionComboBox.getSelectionModel().getSelectedItem().getId();
+            boolean saved = DBCustomers.saveNewCustomer(name, address, postalCode, phone, user, division);
+            if (saved) {
+                Alert successAlert = new Alert(Alert.AlertType.CONFIRMATION, "Customer saved.", ButtonType.OK);
+                successAlert.showAndWait();
+                try {
+                    SceneChange.sceneChange(event, "/view/MainMenu.fxml", "Main Menu");
+                } catch (NullPointerException | IOException e) {
+                    ExceptionHandlers.nextPageError(event);
+                }
+            } else {
+                Alert failedAlert = new Alert(Alert.AlertType.ERROR, "Unable to save customer.");
+                failedAlert.showAndWait();
             }
         } else {
-            Alert failedAlert = new Alert(Alert.AlertType.ERROR, "Unable to save customer.");
-            failedAlert.showAndWait();
+            Alert missingFieldsAlert = new Alert(Alert.AlertType.ERROR, "Please fill all fields.", ButtonType.OK);
+            missingFieldsAlert.showAndWait();
         }
     }
 
