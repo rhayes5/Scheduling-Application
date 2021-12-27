@@ -109,6 +109,18 @@ public class MainMenuController implements Initializable {
     private TableColumn<Appointments, Integer> contactCol;
 
     @FXML
+    private RadioButton allDatesRB;
+
+    @FXML
+    private ToggleGroup whenTG;
+
+    @FXML
+    private RadioButton thisMonthRB;
+
+    @FXML
+    private RadioButton thisWeekRB;
+
+    @FXML
     private Label whoLbl;
 
     @FXML
@@ -364,6 +376,22 @@ public class MainMenuController implements Initializable {
         customersTable.getSelectionModel().clearSelection();
         whoLbl.setText("All Customers");
         appointmentsTable.setItems(DBAppointments.getAllAppointments());
+    }
+
+    @FXML
+    void onActionAllDatesRB(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionThisMonthRB(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionThisWeekRB(ActionEvent event) {
+        appointmentsTable.setItems(DBAppointments.appointmentsByDates(LocalDate.now(), LocalDate.now().plusWeeks(1)));
+
     }
 
     /**
