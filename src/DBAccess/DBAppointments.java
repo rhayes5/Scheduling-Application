@@ -123,7 +123,7 @@ public class DBAppointments {
         ObservableList<Appointments> apptsByContactList = FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT * FROM appointments WHERE contact_id = " + cId;
+            String sql = "SELECT * FROM appointments WHERE contact_id = " + cId + " ORDER BY start";
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
 
