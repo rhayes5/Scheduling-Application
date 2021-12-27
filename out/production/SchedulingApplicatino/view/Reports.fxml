@@ -19,13 +19,13 @@
    <children>
       <TabPane layoutX="24.0" layoutY="67.0" prefHeight="607.0" prefWidth="855.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab fx:id="appointmentsByMonth" text="Appointments by Month">
+            <Tab fx:id="appointmentsByMonth" text="Appointments by Month and Type">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="3.0" layoutY="8.0" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Month">
+                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Month and Type">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -49,24 +49,26 @@
                               </TableView>
                            </children>
                         </HBox>
-                        <Label layoutX="129.0" layoutY="69.0" text="Month:" />
-                        <Label layoutX="548.0" layoutY="69.0" text="Total:" />
-                        <Label fx:id="totalByMonthLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                        <Label layoutX="131.0" layoutY="69.0" text="Month:" />
+                        <Label layoutX="738.0" layoutY="69.0" text="Total:" />
+                        <Label fx:id="totalByMonthLbl" layoutX="780.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
                         <Label layoutX="20.0" layoutY="69.0" text="Year:" />
                         <TextField fx:id="yearTextField" layoutX="52.0" layoutY="65.0" prefHeight="25.0" prefWidth="59.0" promptText="yyyy" />
-                        <ComboBox fx:id="monthCB" layoutX="177.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" />
-                        <Button fx:id="monthSearchBtn" layoutX="404.0" layoutY="65.0" mnemonicParsing="false" onAction="#onActionMonthSearchBtn" text="Search" />
+                        <ComboBox fx:id="monthCB" layoutX="179.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Button fx:id="monthSearchBtn" layoutX="653.0" layoutY="65.0" mnemonicParsing="false" onAction="#onActionMonthSearchBtn" text="Search" />
+                        <Label layoutX="395.0" layoutY="69.0" text="Type" />
+                        <ComboBox fx:id="typeCB" layoutX="433.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab fx:id="appointmentsByWeekTab" text="Appointments by Week">
+            <Tab fx:id="appointmentsByDateTab" text="Appointments by Dates">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <HBox alignment="CENTER" layoutX="3.0" layoutY="8.0" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
                            <children>
-                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Week">
+                              <Label layoutX="10.0" layoutY="10.0" text="Appointments by Dates">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -75,24 +77,24 @@
                         </HBox>
                         <HBox layoutY="97.0" prefHeight="481.0" prefWidth="850.0" spacing="15.0">
                            <children>
-                              <TableView fx:id="appointmentByWeekTableView" prefHeight="481.0" prefWidth="845.0">
+                              <TableView fx:id="appointmentByDateTableView" prefHeight="481.0" prefWidth="845.0">
                                  <columns>
-                                    <TableColumn fx:id="apptIdColByWeek" prefWidth="48.0" text="Appt ID" />
-                                    <TableColumn fx:id="titleColByWeek" prefWidth="96.0" text="Title" />
-                                    <TableColumn fx:id="typeColByWeek" prefWidth="113.0" text="Type" />
-                                    <TableColumn fx:id="descriptionColByWeek" prefWidth="155.0" text="Description" />
-                                    <TableColumn fx:id="locationColByWeek" prefWidth="118.0" text="Location" />
-                                    <TableColumn fx:id="dateColByWeek" prefWidth="88.0" text="Date" />
-                                    <TableColumn fx:id="startTimeColByWeek" prefWidth="72.0" text="Start Time" />
-                                    <TableColumn fx:id="endTimeColByWeek" prefWidth="84.0" text="End Time" />
-                                    <TableColumn fx:id="custIdColByWeek" prefWidth="72.0" text="Cust ID" />
+                                    <TableColumn fx:id="apptIdColByDate" prefWidth="48.0" text="Appt ID" />
+                                    <TableColumn fx:id="titleColByDate" prefWidth="96.0" text="Title" />
+                                    <TableColumn fx:id="typeColByDate" prefWidth="113.0" text="Type" />
+                                    <TableColumn fx:id="descriptionColByDate" prefWidth="155.0" text="Description" />
+                                    <TableColumn fx:id="locationColByDate" prefWidth="118.0" text="Location" />
+                                    <TableColumn fx:id="dateColByDate" prefWidth="88.0" text="Date" />
+                                    <TableColumn fx:id="startTimeColByDate" prefWidth="72.0" text="Start Time" />
+                                    <TableColumn fx:id="endTimeColByDate" prefWidth="84.0" text="End Time" />
+                                    <TableColumn fx:id="custIdColByDate" prefWidth="72.0" text="Cust ID" />
                                  </columns>
                               </TableView>
                            </children>
                         </HBox>
                         <Label layoutX="35.0" layoutY="69.0" text="From:" />
                         <Label layoutX="548.0" layoutY="69.0" text="Total:" />
-                        <Label fx:id="totalByWeekLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
+                        <Label fx:id="totalByDateLbl" layoutX="600.0" layoutY="69.0" prefHeight="17.0" prefWidth="41.0" />
                         <DatePicker fx:id="startingDate" editable="false" layoutX="71.0" layoutY="65.0" prefHeight="25.0" prefWidth="137.0" />
                         <Label layoutX="228.0" layoutY="69.0" text="To:" />
                         <DatePicker fx:id="endDate" editable="false" layoutX="248.0" layoutY="65.0" prefHeight="25.0" prefWidth="137.0" />
@@ -101,43 +103,6 @@
                   </AnchorPane>
                </content>
             </Tab>
-          <Tab fx:id="appointmentsByTypeTab" text="Appointments by Type">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <HBox alignment="CENTER" layoutX="2.0" layoutY="9.0" prefHeight="47.0" prefWidth="849.0" spacing="225.0">
-                           <children>
-                              <Label text="Appointments by Type">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox layoutY="95.0" prefHeight="481.0" prefWidth="850.0" spacing="15.0">
-                           <children>
-                              <TableView fx:id="appointmentsByTypeTableView" prefHeight="482.0" prefWidth="849.0">
-                                 <columns>
-                                    <TableColumn fx:id="apptIdColByType" prefWidth="48.0" text="Appt ID" />
-                                    <TableColumn fx:id="titleColByType" prefWidth="96.0" text="Title" />
-                                    <TableColumn fx:id="typeColByType" prefWidth="113.0" text="Type" />
-                                    <TableColumn fx:id="descriptionColByType" prefWidth="155.0" text="Description" />
-                                    <TableColumn fx:id="locationColByType" prefWidth="118.0" text="Location" />
-                                    <TableColumn fx:id="dateColByType" prefWidth="88.0" text="Date" />
-                                    <TableColumn fx:id="startTimeColByType" prefWidth="72.0" text="Start Time" />
-                                    <TableColumn fx:id="endTimeColByType" prefWidth="84.0" text="End Time" />
-                                    <TableColumn fx:id="custIdColByType" prefWidth="72.0" text="Cust ID" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </HBox>
-                        <ComboBox fx:id="typeCB" layoutX="161.0" layoutY="64.0" onAction="#onActionTypeSelected" prefHeight="25.0" prefWidth="224.0" />
-                        <Label layoutX="102.0" layoutY="68.0" text="Type:" />
-                        <Label layoutX="545.0" layoutY="68.0" text="Total:" />
-                        <Label fx:id="totalByTypeLbl" layoutX="601.0" layoutY="68.0" prefHeight="17.0" prefWidth="41.0" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
             <Tab fx:id="appointmentsByCountryTab" text="Appointments By Country">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="855.0">
@@ -175,7 +140,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-          <Tab fx:id="appointmentsByContactTab" text="Appointments by Contact">
+          <Tab fx:id="appointmentsByContactTab" text="Contact Schedules">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="855.0">
                      <children>
