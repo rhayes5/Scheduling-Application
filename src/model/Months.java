@@ -20,6 +20,10 @@ public class Months {
             "December"
     );
 
+    /**
+     * Returns an observable list of months
+     * @return An observable list of months
+     */
     public static ObservableList<String> getMonths() {
         return month;
     }

@@ -9,6 +9,11 @@ import java.io.IOException;
 
 public class ExceptionHandlers {
 
+    /**
+     * Gives an error message if a page failed to load and tries to return to main menu or closes application and database
+     * connection if unable to load main menu.
+     * @param event The event that preceded the error
+     */
     public static void nextPageError(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to load next page.  Returning to main menu.", ButtonType.OK);
         alert.showAndWait();

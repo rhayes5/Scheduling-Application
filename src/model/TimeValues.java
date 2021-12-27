@@ -7,8 +7,18 @@ import java.time.LocalTime;
 
 public class TimeValues {
 
+    /**
+     * An observable list of the values "AM" and "PM" to fill combo boxes
+     */
     public static final ObservableList<String> amPm = FXCollections.observableArrayList("AM", "PM");
 
+    /**
+     * Takes input values for time and converts to LocalTime object.
+     * @param hour the input hour
+     * @param min the input minutes
+     * @param amPm the selected value "AM" or "PM"
+     * @return the LocalTime object
+     */
     public static LocalTime setTime(int hour, int min, String amPm)
     {
         if (amPm.equals("PM"))
