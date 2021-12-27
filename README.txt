@@ -1,6 +1,6 @@
 Title and Purpose
 -------------------------------------------------------------------------------------------------
-Scheduling Applicaton
+Scheduling Application
 
 The purpose of this application is to schedule appointments for customers making sure that appointments do not overlap and are within business hours.  The user can add, update, and delete customers and appointments, all of which are updated in the database.  The application also keeps track of the contacts associated with the appointments and the user who created/updated the appointments or customers.
 
@@ -40,7 +40,7 @@ Update Appointment: Click on the appointment to update in the table and click th
 
 Delete Appointment: To delete an appointment, click the appointment in the appointment table, then click delete below the appointment table and confirm you wish to delete.  
 
-View Reports: Click the View Reports button at the bottom of the main menu.  You can view appontments by month, week, type, country, contact, and see login attempts.  Click the tabs at the top to switch between reports.  Click back to return to the main menu.
+View Reports: Click the View Reports button at the bottom of the main menu.  You can view appointments by month, week, type, country, contact, and see login attempts.  Click the tabs at the top to switch between reports.  Click back to return to the main menu.
 
     Appointments by Month And Type: Enter a 4-digit year and select a month from the combo box,  select the type from the type combo box, and click search. The table will update to appointments of that type in that month and year and show the total number of appointments.
 
@@ -52,6 +52,7 @@ View Reports: Click the View Reports button at the bottom of the main menu.  You
 
     Login Attempts: See all login attempts, whether successful or failed, and dates/times.
 
+--------------------------------------------------------------------------------------------------
 
 A.3.f Description of Additional Report(s)
 

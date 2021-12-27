@@ -1,4 +1,0 @@
-
-•  the total number of customer appointments by type and month
-
-contact report group by date

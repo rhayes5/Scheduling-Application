@@ -256,7 +256,6 @@ public class MainMenuController implements Initializable {
     void onActionUpdateAppointment(ActionEvent event) {
         if (appointmentsTable.getSelectionModel().getSelectedItem() != null) {
             try {
-
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/view/UpdateAppointment.fxml"));
                 loader.load();
