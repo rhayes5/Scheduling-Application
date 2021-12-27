@@ -134,6 +134,8 @@ public class LoginController implements Initializable {
 
     /**
      * Initializes the login page in English or French and adds user's location and time zone based on system default locale.
+     * The first lambda expression uses the interface to get and display the user's country as a string on the login page using the user's default locale.
+     * The second lambda expression uses the interface to get and display the user's time zone on the login page using the user's default locale.
      * @param url The location used
      * @param rb The resources used
      */
@@ -152,7 +154,6 @@ public class LoginController implements Initializable {
         } catch (MissingResourceException e) {
             //do nothing, stay in English
         }
-
         //display country on login
         GeneralInterfaces.StringFromLocale country = userCountry -> String.valueOf(userCountry.getDisplayCountry());
         locationLbl.setText(country.stringFromLocale(Locale.getDefault()));
@@ -161,7 +162,6 @@ public class LoginController implements Initializable {
         GeneralInterfaces.StringFromLocale getUserTimeZone = (Locale l) -> TimeZone.getDefault().getDisplayName(l);
         timeZoneLbl.setText(getUserTimeZone.stringFromLocale(Locale.getDefault()));
     }
-
 }
 
 
