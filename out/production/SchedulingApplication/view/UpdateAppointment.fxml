@@ -62,7 +62,7 @@
                 <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ComboBox fx:id="typeCB" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <DatePicker fx:id="dateField" prefHeight="25.0" prefWidth="186.0" GridPane.columnIndex="3" />
+                <DatePicker fx:id="dateField" editable="false" prefHeight="25.0" prefWidth="186.0" GridPane.columnIndex="3" />
                 <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="209.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                     <children>
                         <TextField fx:id="startHourField" prefHeight="25.0" prefWidth="40.0" promptText="HH" />

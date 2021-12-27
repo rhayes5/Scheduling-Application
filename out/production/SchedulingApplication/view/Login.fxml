@@ -52,7 +52,8 @@
          </children>
       </GridPane>
       <Label fx:id="greetingLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="14.0" prefHeight="54.0" prefWidth="241.0" text="Please enter your username and password." wrapText="true" />
-      <Label fx:id="locationLbl" alignment="CENTER" layoutX="108.0" layoutY="178.0" prefHeight="17.0" text="User's Location" />
+      <Label fx:id="locationLbl" alignment="CENTER" layoutX="18.0" layoutY="169.0" prefHeight="17.0" prefWidth="255.0" text="User's Location" textAlignment="CENTER" />
+      <Label fx:id="timeZoneLbl" alignment="CENTER" layoutX="19.0" layoutY="190.0" prefHeight="17.0" prefWidth="255.0" text="User's TimeZone" textAlignment="CENTER" />
    </children>
    <padding>
       <Insets bottom="15.0" left="15.0" top="15.0" />

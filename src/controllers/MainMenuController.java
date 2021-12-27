@@ -379,8 +379,8 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionAllDatesRB(ActionEvent event) {
         customersTable.getSelectionModel().clearSelection();
+        whoLbl.setText("All Customers");
         appointmentsTable.setItems(DBAppointments.getAllAppointments());
-
     }
 
     /**
@@ -390,6 +390,7 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionThisMonthRB(ActionEvent event) {
         customersTable.getSelectionModel().clearSelection();
+        whoLbl.setText("All Customers");
         String month = LocalDate.now().getMonth().toString().toLowerCase();
         String mFirstLetter = month.substring(0,1).toUpperCase();
         month = mFirstLetter + month.substring(1);
@@ -403,6 +404,7 @@ public class MainMenuController implements Initializable {
     @FXML
     void onActionThisWeekRB(ActionEvent event) {
         customersTable.getSelectionModel().clearSelection();
+        whoLbl.setText("All Customers");
         appointmentsTable.setItems(DBAppointments.appointmentsByDates(LocalDate.now(), LocalDate.now().plusWeeks(1)));
     }
 
