@@ -20,9 +20,6 @@ import java.util.ResourceBundle;
 public class ReportsController implements Initializable {
 
     @FXML
-    private Tab customerAppointmentsTab;
-
-    @FXML
     private TableView<Appointments> appointmentsByTypeTableView;
 
     @FXML
@@ -89,40 +86,40 @@ public class ReportsController implements Initializable {
     private Button monthSearchBtn;
 
     @FXML
-    private Tab appointmentsByWeekTab;
+    private Tab appointmentsByDateTab;
 
     @FXML
-    private TableView<Appointments> appointmentByWeekTableView;
+    private TableView<Appointments> appointmentByDateTableView;
 
     @FXML
-    private TableColumn<Appointments, Integer> apptIdColByWeek;
+    private TableColumn<Appointments, Integer> apptIdColByDate;
 
     @FXML
-    private TableColumn<Appointments, String> titleColByWeek;
+    private TableColumn<Appointments, String> titleColByDate;
 
     @FXML
-    private TableColumn<Appointments, String> typeColByWeek;
+    private TableColumn<Appointments, String> typeColByDate;
 
     @FXML
-    private TableColumn<Appointments, String> descriptionColByWeek;
+    private TableColumn<Appointments, String> descriptionColByDate;
 
     @FXML
-    private TableColumn<Appointments, String> locationColByWeek;
+    private TableColumn<Appointments, String> locationColByDate;
 
     @FXML
-    private TableColumn<Appointments, LocalDate> dateColByWeek;
+    private TableColumn<Appointments, LocalDate> dateColByDate;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeColByWeek;
+    private TableColumn<Appointments, LocalTime> startTimeColByDate;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> endTimeColByWeek;
+    private TableColumn<Appointments, LocalTime> endTimeColByDate;
 
     @FXML
-    private TableColumn<Appointments, Integer> custIdColByWeek;
+    private TableColumn<Appointments, Integer> custIdColByDate;
 
     @FXML
-    private Label totalByWeekLbl;
+    private Label totalByDateLbl;
 
     @FXML
     private DatePicker startingDate;
@@ -233,27 +230,6 @@ public class ReportsController implements Initializable {
     private Button backBtn;
 
     /**
-     * Filters appointments by a specific type when a type is selected from a combo box and displays those appointments
-     * in a table view.
-     * @param event A specific type is selected from the Type combo box
-     */
-    @FXML
-    void onActionTypeSelected(ActionEvent event) {
-        appointmentsByTypeTableView.setItems(DBAppointments.getApptsByType(typeCB.getSelectionModel().getSelectedItem()));
-        apptIdColByType.setCellValueFactory(new PropertyValueFactory<>("id"));
-        titleColByType.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionColByType.setCellValueFactory(new PropertyValueFactory<>("description"));
-        typeColByType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        locationColByType.setCellValueFactory(new PropertyValueFactory<>("location"));
-        dateColByType.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeColByType.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeColByType.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        custIdColByType.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-
-        totalByTypeLbl.setText(String.valueOf(appointmentsByTypeTableView.getItems().size()));
-    }
-
-    /**
      * Filters appointments scheduled in a specific year and month when a year is entered and a month is selected from a
      * combo box and displays those appointments in a table view.
      * @param event The search button is selected on the month tab
@@ -261,7 +237,7 @@ public class ReportsController implements Initializable {
     @FXML
     void onActionMonthSearchBtn(ActionEvent event) {
         if (CheckValues.isYear(yearTextField.getText())) {
-            appointmentByMonthTableView.setItems(DBAppointments.getApptsByMonth(Integer.valueOf(yearTextField.getText()), monthCB.getSelectionModel().getSelectedItem()));
+            appointmentByMonthTableView.setItems(DBAppointments.getApptsByMonthAndType(Integer.valueOf(yearTextField.getText()), monthCB.getSelectionModel().getSelectedItem(), typeCB.getSelectionModel().getSelectedItem()));
             apptIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("id"));
             titleColByMonth.setCellValueFactory(new PropertyValueFactory<>("title"));
             typeColByMonth.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -330,18 +306,18 @@ public class ReportsController implements Initializable {
     void onActionSearchDatesBtn(ActionEvent event) {
         LocalDate startSearch= startingDate.getValue();
         LocalDate endSearch = endDate.getValue();
-        appointmentByWeekTableView.setItems(DBAppointments.appointmentsByDates(startSearch, endSearch));
-        apptIdColByWeek.setCellValueFactory(new PropertyValueFactory<>("id"));
-        titleColByWeek.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionColByWeek.setCellValueFactory(new PropertyValueFactory<>("description"));
-        typeColByWeek.setCellValueFactory(new PropertyValueFactory<>("type"));
-        locationColByWeek.setCellValueFactory(new PropertyValueFactory<>("location"));
-        dateColByWeek.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeColByWeek.setCellValueFactory(new PropertyValueFactory<>("endTime"));
-        custIdColByWeek.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        appointmentByDateTableView.setItems(DBAppointments.appointmentsByDates(startSearch, endSearch));
+        apptIdColByDate.setCellValueFactory(new PropertyValueFactory<>("id"));
+        titleColByDate.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionColByDate.setCellValueFactory(new PropertyValueFactory<>("description"));
+        typeColByDate.setCellValueFactory(new PropertyValueFactory<>("type"));
+        locationColByDate.setCellValueFactory(new PropertyValueFactory<>("location"));
+        dateColByDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        startTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        endTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        custIdColByDate.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
-        totalByWeekLbl.setText(String.valueOf(appointmentByWeekTableView.getItems().size()));
+        totalByDateLbl.setText(String.valueOf(appointmentByDateTableView.getItems().size()));
     }
 
     /**

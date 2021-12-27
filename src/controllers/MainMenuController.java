@@ -146,12 +146,6 @@ public class MainMenuController implements Initializable {
         {
             if (!findName(nameSearch).isEmpty()) {
                 customersTable.setItems(findName(nameSearch));
-                custIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-                nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-                addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
-                postalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-                phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
-                divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
             }
         }
     }
@@ -378,20 +372,38 @@ public class MainMenuController implements Initializable {
         appointmentsTable.setItems(DBAppointments.getAllAppointments());
     }
 
+    /**
+     * Displays all appointments for all customers.
+     * @param event The All Dates radio button is clicked
+     */
     @FXML
     void onActionAllDatesRB(ActionEvent event) {
+        customersTable.getSelectionModel().clearSelection();
+        appointmentsTable.setItems(DBAppointments.getAllAppointments());
 
     }
 
+    /**
+     * Displays appointments for all customers in the current month.
+     * @param event The This Month radio button is clicked
+     */
     @FXML
     void onActionThisMonthRB(ActionEvent event) {
-
+        customersTable.getSelectionModel().clearSelection();
+        String month = LocalDate.now().getMonth().toString().toLowerCase();
+        String mFirstLetter = month.substring(0,1).toUpperCase();
+        month = mFirstLetter + month.substring(1);
+        appointmentsTable.setItems(DBAppointments.getApptsByMonth(LocalDate.now().getYear(), month));
     }
 
+    /**
+     * Displays appointments for all customers in a week beginning on the current day.
+     * @param event The This Week radio button is clicked
+     */
     @FXML
     void onActionThisWeekRB(ActionEvent event) {
+        customersTable.getSelectionModel().clearSelection();
         appointmentsTable.setItems(DBAppointments.appointmentsByDates(LocalDate.now(), LocalDate.now().plusWeeks(1)));
-
     }
 
     /**

@@ -216,52 +216,26 @@ public class DBAppointments {
     }
 
     /**
-     * Searches for appointments in the database of a specific type and returns a list of those appointments.
-     * @param t The type of appointment string
-     * @return An observable list of all appointments of that type
+     * Searches for appointments in the database of a specific type, month, and year and returns a list of those appointments.
+     * @param year the 4-digit year
+     * @param month the month string
+     * @param type the appointment type string
+     * @return An observable list of all appointments of that type in the month and year
      */
-    public static ObservableList<Appointments> getApptsByType(String t)
+    public static ObservableList<Appointments> getApptsByMonthAndType(Integer year, String month, String type)
     {
-        ObservableList<Appointments> apptsByTypeList = FXCollections.observableArrayList();
+        ObservableList<Appointments> apptsByMonthList = FXCollections.observableArrayList();
+        ObservableList<Appointments> apptsByMonthAndTypeList = FXCollections.observableArrayList();
 
-        try {
-            String sql = "SELECT * FROM appointments";
-            PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next())
+        apptsByMonthList = getApptsByMonth(year, month);
+        for (Appointments a : apptsByMonthList)
+        {
+            if (a.getType().equals(type))
             {
-                String type = rs.getString("Type");
-
-                if(type.equals(t)) {
-                    int id = rs.getInt("Appointment_ID");
-                    String title = rs.getString("Title");
-                    String description = rs.getString("Description");
-                    String location = rs.getString("Location");
-
-                    LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-                    ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
-                    LocalDate startDate = startZoned.toLocalDate();
-                    LocalTime startTime = startZoned.toLocalTime();
-
-                    LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-                    ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
-                    LocalDate endDate = endZoned.toLocalDate();
-                    LocalTime endTime = endZoned.toLocalTime();
-
-                    int customerId = rs.getInt("Customer_ID");
-                    int userId = rs.getInt("User_ID");
-                    int contactId = rs.getInt("Contact_ID");
-
-                    Appointments a = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
-                    apptsByTypeList.add(a);
-                }
+                apptsByMonthAndTypeList.add(a);
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return apptsByTypeList;
+        return apptsByMonthAndTypeList;
     }
 
     /**
