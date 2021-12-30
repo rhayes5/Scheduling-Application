@@ -121,6 +121,11 @@ public class DBAppointments {
         return apptsByCustomerList;
     }
 
+    /**
+     * Returns a string formatting the time as h:mm with am or pm
+     * @param l the local time to format
+     * @return a string formatted as h:mm with am or pm
+     */
     public static String getObservableTime(LocalTime l) {
         return l.format(DateTimeFormatter.ofPattern("h:mm a"));
     }
