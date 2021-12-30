@@ -13,6 +13,7 @@ Date: December 27, 2021
 IDE: IntelliJ IDEA 2021.1.3 (Community Edition)
 JDK: Java SE 11.0.13
 JavaFX:JavaFX-SDK-11.0.2
+MySQL Connector: 8.0.27
 
 --------------------------------------------------------------------------------------------------
 

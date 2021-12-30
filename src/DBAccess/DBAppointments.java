@@ -11,10 +11,13 @@ import model.FirstLevelDivisions;
 import model.Months;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 public class DBAppointments {
 
@@ -44,17 +47,20 @@ public class DBAppointments {
                 ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                 LocalDate startDate = startZoned.toLocalDate();
                 LocalTime startTime = startZoned.toLocalTime();
+                String formattedStart = getObservableTime(startTime);
 
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                 ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                 LocalDate endDate = endZoned.toLocalDate();
                 LocalTime endTime = endZoned.toLocalTime();
+                String formattedEnd = getObservableTime(endTime);
 
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
 
-                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime,
+                        formattedStart, endDate, endTime, formattedEnd, customerId, userId, contactId);
                 appointmentsList.add(c);
             }
         }
@@ -92,25 +98,31 @@ public class DBAppointments {
                 ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                 LocalDate startDate = startZoned.toLocalDate();
                 LocalTime startTime = startZoned.toLocalTime();
+                String formattedStart = getObservableTime(startTime);
 
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                 ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                 LocalDate endDate = endZoned.toLocalDate();
                 LocalTime endTime = endZoned.toLocalTime();
+                String formattedEnd = getObservableTime(endTime);
 
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
 
-                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime,
+                        formattedStart, endDate, endTime, formattedEnd, customerId, userId, contactId);
                 apptsByCustomerList.add(c);
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-
         return apptsByCustomerList;
+    }
+
+    public static String getObservableTime(LocalTime l) {
+        return l.format(DateTimeFormatter.ofPattern("h:mm a"));
     }
 
     /**
@@ -141,16 +153,19 @@ public class DBAppointments {
                 ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                 LocalDate startDate = startZoned.toLocalDate();
                 LocalTime startTime = startZoned.toLocalTime();
+                String formattedStart = getObservableTime(startTime);
 
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                 ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                 LocalDate endDate = endZoned.toLocalDate();
                 LocalTime endTime = endZoned.toLocalTime();
+                String formattedEnd = getObservableTime(endTime);
 
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
 
-                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, cId);
+                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime,
+                        formattedStart, endDate, endTime, formattedEnd, customerId, userId, cId);
                 apptsByContactList.add(c);
             }
         }
@@ -195,17 +210,20 @@ public class DBAppointments {
                     String location = rs.getString("Location");
                     String type = rs.getString("Type");
 
+                    String formattedStart = getObservableTime(startTime);
                     LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                     ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                     LocalDate endDate = endZoned.toLocalDate();
                     LocalTime endTime = endZoned.toLocalTime();
+                    String formattedEnd = getObservableTime(endTime);
 
                     int customerId = rs.getInt("Customer_ID");
                     int userId = rs.getInt("User_ID");
                     int contactId = rs.getInt("Contact_ID");
 
-                    Appointments a = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
-                    apptsByMonthList.add(a);
+                    Appointments c = new Appointments(id, title, description, location, type, startDate, startTime,
+                            formattedStart, endDate, endTime, formattedEnd, customerId, userId, contactId);
+                    apptsByMonthList.add(c);
                 }
             }
         }
@@ -270,17 +288,20 @@ public class DBAppointments {
                     ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                     LocalDate startDate = startZoned.toLocalDate();
                     LocalTime startTime = startZoned.toLocalTime();
+                    String formattedStart = getObservableTime(startTime);
 
                     LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                     ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                     LocalDate endDate = endZoned.toLocalDate();
                     LocalTime endTime = endZoned.toLocalTime();
+                    String formattedEnd = getObservableTime(endTime);
 
 
                     int userId = rs.getInt("User_ID");
                     int contactId = rs.getInt("Contact_ID");
 
-                    Appointments a = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+                    Appointments a = new Appointments(id, title, description, location, type, startDate, startTime,
+                            formattedStart, endDate, endTime, formattedEnd, customerId, userId, contactId);
                     apptsByCountryList.add(a);
                 }
             }
@@ -346,17 +367,20 @@ public class DBAppointments {
             ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
             LocalDate startDate = startZoned.toLocalDate();
             LocalTime startTime = startZoned.toLocalTime();
+            String formattedStart = getObservableTime(startTime);
 
             LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
             ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
             LocalDate endDate = endZoned.toLocalDate();
             LocalTime endTime = endZoned.toLocalTime();
+            String formattedEnd = getObservableTime(endTime);
 
             int customerId = rs.getInt("Customer_ID");
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");
 
-            return new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+            return new Appointments(id, title, description, location, type, startDate, startTime, formattedStart,
+                    endDate, endTime, formattedEnd, customerId, userId, contactId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -512,17 +536,20 @@ public class DBAppointments {
                 ZonedDateTime startZoned = start.atZone(ZoneId.systemDefault());
                 LocalDate startDate = startZoned.toLocalDate();
                 LocalTime startTime = startZoned.toLocalTime();
+                String formattedStart = getObservableTime(startTime);
 
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                 ZonedDateTime endZoned = end.atZone(ZoneId.systemDefault());
                 LocalDate endDate = endZoned.toLocalDate();
                 LocalTime endTime = endZoned.toLocalTime();
+                String formattedEnd = getObservableTime(endTime);
 
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
 
-                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime, endDate, endTime, customerId, userId, contactId);
+                Appointments c = new Appointments(id, title, description, location, type, startDate, startTime,
+                        formattedStart, endDate, endTime, formattedEnd, customerId, userId, contactId);
                 apptsByWeekList.add(c);
             }
         }

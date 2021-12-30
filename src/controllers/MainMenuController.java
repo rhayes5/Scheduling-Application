@@ -97,7 +97,7 @@ public class MainMenuController implements Initializable {
     private TableColumn<Appointments, LocalDate> startDateCol;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeCol;
+    private TableColumn<Appointments, String> startTimeCol;
 
     @FXML
     private TableColumn<Appointments, LocalDate> endDateCol;
@@ -424,6 +424,9 @@ public class MainMenuController implements Initializable {
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
         divisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
 
+        //get time string
+
+
         //fill appointments table
         appointmentsTable.setItems(DBAppointments.getAllAppointments());
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -432,9 +435,9 @@ public class MainMenuController implements Initializable {
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
         endDateCol.setCellValueFactory(new PropertyValueFactory<>("endDate"));
-        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
 
         welcomeLbl.setText("Welcome, " + User.getUsername());

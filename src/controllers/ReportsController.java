@@ -71,10 +71,10 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, LocalDate> dateColByMonth;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeColByMonth;
+    private TableColumn<Appointments, String> startTimeColByMonth;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> endTimeColByMonth;
+    private TableColumn<Appointments, String> endTimeColByMonth;
 
     @FXML
     private TableColumn<Appointments, Integer> custIdColByMonth;
@@ -110,10 +110,10 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, LocalDate> dateColByDate;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeColByDate;
+    private TableColumn<Appointments, String> startTimeColByDate;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> endTimeColByDate;
+    private TableColumn<Appointments, String> endTimeColByDate;
 
     @FXML
     private TableColumn<Appointments, Integer> custIdColByDate;
@@ -161,10 +161,10 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, LocalDate> dateColByCountry;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeColByCountry;
+    private TableColumn<Appointments, String> startTimeColByCountry;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> endTimeColByCountry;
+    private TableColumn<Appointments, String> endTimeColByCountry;
 
     @FXML
     private TableColumn<Appointments, Integer> custIdColByCountry;
@@ -206,10 +206,10 @@ public class ReportsController implements Initializable {
     private TableColumn<Appointments, LocalDate> dateCol;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> startTimeCol;
+    private TableColumn<Appointments, String> startTimeCol;
 
     @FXML
-    private TableColumn<Appointments, LocalTime> endTimeCol;
+    private TableColumn<Appointments, String> endTimeCol;
 
     @FXML
     private TableColumn<Appointments, Integer> custIdCol;
@@ -244,8 +244,8 @@ public class ReportsController implements Initializable {
             descriptionColByMonth.setCellValueFactory(new PropertyValueFactory<>("description"));
             locationColByMonth.setCellValueFactory(new PropertyValueFactory<>("location"));
             dateColByMonth.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-            startTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-            endTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+            startTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+            endTimeColByMonth.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
             custIdColByMonth.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
             totalByMonthLbl.setText(String.valueOf(appointmentByMonthTableView.getItems().size()));
@@ -269,8 +269,8 @@ public class ReportsController implements Initializable {
         typeColByCountry.setCellValueFactory(new PropertyValueFactory<>("type"));
         locationColByCountry.setCellValueFactory(new PropertyValueFactory<>("location"));
         dateColByCountry.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        startTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+        endTimeColByCountry.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
         custIdColByCountry.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
         totalByCountryLbl.setText(String.valueOf(apointmentsByCountryTableView.getItems().size()));
@@ -290,8 +290,8 @@ public class ReportsController implements Initializable {
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
         totalApptsLbl.setText(String.valueOf(appointmentByContactsTableView.getItems().size()));
@@ -313,8 +313,8 @@ public class ReportsController implements Initializable {
         typeColByDate.setCellValueFactory(new PropertyValueFactory<>("type"));
         locationColByDate.setCellValueFactory(new PropertyValueFactory<>("location"));
         dateColByDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        startTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        endTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        startTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("formattedStart"));
+        endTimeColByDate.setCellValueFactory(new PropertyValueFactory<>("formattedEnd"));
         custIdColByDate.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
         totalByDateLbl.setText(String.valueOf(appointmentByDateTableView.getItems().size()));

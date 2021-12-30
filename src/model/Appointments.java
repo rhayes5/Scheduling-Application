@@ -12,8 +12,10 @@ public class Appointments {
     private String type;
     private LocalDate startDate;
     private LocalTime startTime;
+    private String formattedStart;
     private LocalDate endDate;
     private LocalTime endTime;
+    private String formattedEnd;
     private int customerId;
     private int userId;
     private int contactId;
@@ -33,8 +35,8 @@ public class Appointments {
      * @param userId Appointment user id integer
      * @param contactId Appointment contact id integer
      */
-    public Appointments(int id, String title, String description, String location, String type, LocalDate startDate, LocalTime startTime,
-                        LocalDate endDate, LocalTime endTime, int customerId, int userId, int contactId)
+    public Appointments(int id, String title, String description, String location, String type, LocalDate startDate, LocalTime startTime, String formattedStart,
+                        LocalDate endDate, LocalTime endTime, String formattedEnd, int customerId, int userId, int contactId)
     {
         this.id = id;
         this.title = title;
@@ -43,8 +45,10 @@ public class Appointments {
         this.type = type;
         this.startDate = startDate;
         this.startTime = startTime;
+        this.formattedStart = formattedStart;
         this.endDate = endDate;
         this.endTime = endTime;
+        this.formattedEnd = formattedEnd;
         this.customerId = customerId;
         this.userId = userId;
         this.contactId = contactId;
@@ -240,5 +244,21 @@ public class Appointments {
      */
     public void setContactId(int contactId) {
         this.contactId = contactId;
+    }
+
+    public String getFormattedStart() {
+        return formattedStart;
+    }
+
+    public void setFormattedStart(String formattedStart) {
+        this.formattedStart = formattedStart;
+    }
+
+    public String getFormattedEnd() {
+        return formattedEnd;
+    }
+
+    public void setFormattedEnd(String formattedEnd) {
+        this.formattedEnd = formattedEnd;
     }
 }
