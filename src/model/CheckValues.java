@@ -90,11 +90,13 @@ public class CheckValues {
         //convert to UTC
         LocalDateTime openDateTime = LocalDateTime.of(startDateTime.toLocalDate(), openTime);
         ZonedDateTime zonedOpen = ZonedDateTime.of(openDateTime, ZoneId.of("America/New_York"));
-        LocalDateTime closeDateTime = LocalDateTime.of(startDateTime.toLocalDate().plusDays(1), closeTime);
+        LocalDateTime closeDateTime = LocalDateTime.of(startDateTime.toLocalDate(), closeTime);
         ZonedDateTime zonedClose = ZonedDateTime.of(closeDateTime, ZoneId.of("America/New_York"));
 
         ZonedDateTime openInUTC = zonedOpen.withZoneSameInstant(ZoneId.of("UTC"));
         ZonedDateTime closeInUTC = zonedClose.withZoneSameInstant(ZoneId.of("UTC"));
+        System.out.println(openInUTC);
+        System.out.println(closeInUTC);
 
         if ((startInUTC.isAfter(openInUTC) || startInUTC.isEqual(openInUTC)) &&
                 (endInUTC.isBefore(closeInUTC) || endInUTC.isEqual(closeInUTC)))

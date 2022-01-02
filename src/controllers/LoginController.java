@@ -84,7 +84,8 @@ public class LoginController implements Initializable {
                         upcomingAppointmentAlert.setContentText("There is an upcoming appointment in " +
                                 Duration.between(LocalTime.now(),
                                         appointment.getStartTime()).toMinutes() + " minute(s) " +
-                                "\n\nDate: " + appointment.getStartDate() +
+                                "\n\nAppointment ID: " + appointment.getId() +
+                                "\nDate: " + appointment.getStartDate() +
                                 "\nTime: " + appointment.getFormattedStart() + " - " + appointment.getFormattedEnd() +
                                 "\nCustomer: " + DBCustomers.getCustomerById(appointment.getCustomerId()).getName() +
                                 "\nContact: " + DBContacts.getContactById(appointment.getContactId()).getName() +
