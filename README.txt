@@ -4,9 +4,6 @@ Scheduling Application
 
 The purpose of this application is to schedule appointments for customers making sure that appointments do not overlap and are within business hours.  The user can add, update, and delete customers and appointments, all of which are updated in the database.  The application also keeps track of the contacts associated with the appointments and the user who created/updated the appointments or customers.
 
-Author: Rychell Hayes
-Contact Information: rhayes5@wgu.edu
-
 Version: V1
 Date: December 27, 2021
 
