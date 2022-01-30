@@ -2,7 +2,7 @@ Title and Purpose
 -------------------------------------------------------------------------------------------------
 Scheduling Application
 
-The purpose of this application is to schedule appointments for customers making sure that appointments do not overlap and are within business hours.  The user can add, update, and delete customers and appointments, all of which are updated in the database.  The application also keeps track of the contacts associated with the appointments and the user who created/updated the appointments or customers.
+The purpose of this application is to schedule appointments for customers ensuring that appointments do not overlap and are within business hours.  The user can add, update, and delete customers and appointments, all of which are updated in the database.  The application also keeps track of the contacts associated with the appointments and the user who created/updated the appointments or customers.
 
 Version: V1
 Date: December 27, 2021
@@ -49,10 +49,6 @@ View Reports: Click the View Reports button at the bottom of the main menu.  You
     Contact Schedule: Select the contact from the combo box and the table will update to appointments with that contact and show the total number of appointments for that contact.
 
     Login Attempts: See all login attempts, whether successful or failed, and dates/times.
-
---------------------------------------------------------------------------------------------------
-
-A.3.f Description of Additional Report(s)
 
     Appointments by Dates: Allows the user to see appointments in any date range.  Select the beginning and ending dates in the date-pickers for the dates you'd like to view and then click Search.
 
